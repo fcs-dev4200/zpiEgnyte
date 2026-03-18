@@ -98,30 +98,30 @@ function getAuth(req, res, next) {
 app.use(getAuth);
 
 const port = 8000;
-app.listen(port, (err) => {
+app.listen(process.env.PORT || port, (err) => {
   if (err) {
     throw err;
   }
   console.log(`ZPI Search running on port: ${port}`);
 });
 
-// process.stdin.resume();
+process.stdin.resume();
 
-// process.on("unhandledRejection", (err) => {
-//   console.log("UNHANDLED REJECTION! Shutting down...");
-//   logger.fatal(err, "UNCAUGHT EXCEPTION!");
-//   server.close(() => {
-//     process.exit(1);
-//   });
-// });
+process.on("unhandledRejection", (err) => {
+  console.log("UNHANDLED REJECTION! Shutting down...");
+  logger.fatal(err, "UNCAUGHT EXCEPTION!");
+  server.close(() => {
+    process.exit(1);
+  });
+});
 
 // This should be left disable during production. Only enable this if you are doing local development
 
-// (async function () {
-//   const listener = await ngrok.forward({
-//     addr: port,
-//     authtoken: process.env.NGROK_AUTHTOKEN,
-//     domain: process.env.NGROK_DOMAIN,
-//   });
-//   console.log("Ingress established at", listener.url());
-// })();
+(async function () {
+  const listener = await ngrok.forward({
+    addr: port,
+    authtoken: process.env.NGROK_AUTHTOKEN,
+    domain: process.env.NGROK_DOMAIN,
+  });
+  console.log("Ingress established at", listener.url());
+})();
