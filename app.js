@@ -50,9 +50,6 @@ app.post("/log-in", async (req, res) => {
     req.session.user = userObj;
     const sesh = req.session;
     const cookie = sesh.cookie;
-    // console.log("session", sesh);
-    // console.log("cookie", cookie);
-    // console.log("username?", cookie.user);
     res.redirect("/");
   } else {
     res.render("login-error");
@@ -78,13 +75,12 @@ app.get("/cookie-test", (req, res) => {
 app.get("/", (req, res) => {
   const sessionData = req.session || {};
   if (sessionData.user) {
-    // console.log("authenticated");
     res.render("display");
   } else {
-    // console.log("sign in");
     res.redirect("/login");
   }
 });
+
 app.use("/search", searchRouter);
 
 function getAuth(req, res, next) {
@@ -117,11 +113,11 @@ process.on("unhandledRejection", (err) => {
 
 // This should be left disable during production. Only enable this if you are doing local development
 
-// (async function () {
-//   const listener = await ngrok.forward({
-//     addr: port,
-//     authtoken: process.env.NGROK_AUTHTOKEN,
-//     domain: process.env.NGROK_DOMAIN,
-//   });
-//   console.log("Ingress established at", listener.url());
-// })();
+(async function () {
+  const listener = await ngrok.forward({
+    addr: port,
+    authtoken: process.env.NGROK_AUTHTOKEN,
+    domain: process.env.NGROK_DOMAIN,
+  });
+  console.log("Ingress established at", listener.url());
+})();

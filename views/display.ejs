@@ -11,40 +11,52 @@
 </head>
 
 <body>
-  <section id="header">
-    <span class="img"><img src="https://zpi.com/wp-content/uploads/2018/06/Zephyr-Horizontal-02.png"></span>
-    <h1 class="header">
-      <p>Search for files on Egnyte</p>
-    </h1>
-  </section>
+  <span class="loader-text">
+    <p class="loading-text">Searching for files. Please wait...</p>
+  </span>
 
 
-  <div class="searchForm">
-    <form action="/search" method="POST" id="search">
-      <label for="query" class="q-label">Query: </label>
-      <input type="text" name="query" id="query" placeholder="'Florida' 'PDF'" />
-      <input type="checkbox" id="wildcard" name="wildcard" value="useWildcard" class="wildcard" />
-      <label for="wildcard" class="wildcard">Wildcard search</label>
-      <label for="folder">Folder path to search</label>
-      <select name="folder" id="folder-select">
-        <option value="Projects">Projects</option>
-        <option value="Design-Engineering">Design-Engineering</option>
-        <option value="Restoration & Maintenance">Restoration & Maintenance</option>
-      </select>
-      <button type="submit" class="s-btn">Search</button>
-    </form>
+  <div class="loader-container">
+    <div class="spinner"></div>
   </div>
 
-  <div class="tooltip">
-    <img src="/images/info.svg">
-    <span class=" tooltiptext">
-      By default, your search will look for the exact phrase. If you want to search for results that match ANY words in
-      your phrase, please check this box
-    </span>
+  <div id="main-content">
+    <section id="header">
+      <span class="img"><img src="https://zpi.com/wp-content/uploads/2018/06/Zephyr-Horizontal-02.png"></span>
+      <h1 class="header">
+        <p>Search for files on Egnyte</p>
+      </h1>
+    </section>
+
+
+    <div class="searchForm">
+      <form action="/search" method="POST" id="search">
+        <label for="query" class="q-label">Query: </label>
+        <input type="text" name="query" id="query" placeholder="'Florida' 'PDF'" />
+        <input type="checkbox" id="wildcard" name="wildcard" value="useWildcard" class="wildcard" />
+        <label for="wildcard" class="wildcard">Wildcard search</label>
+        <label for="folder">Folder path to search</label>
+        <select name="folder" id="folder-select">
+          <option value="Projects">Projects</option>
+          <option value="Design-Engineering">Design-Engineering</option>
+          <option value="Restoration & Maintenance">Restoration & Maintenance</option>
+        </select>
+        <button type="submit" class="s-btn">Search</button>
+      </form>
+    </div>
+
+    <div class="tooltip">
+      <img src="/images/info.svg">
+      <span class=" tooltiptext">
+        By default, your search will look for the exact phrase. If you want to search for results that match ANY words
+        in
+        your phrase, please check this box
+      </span>
+    </div>
   </div>
 
   <%- include('partials/footer') %>
-    <script src="https://kit.fontawesome.com/0bb98c18b8.js" crossorigin="anonymous"></script>
+    <script src="/js/load.js"></script>
 </body>
 
 </html>
